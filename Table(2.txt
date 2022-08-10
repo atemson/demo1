@@ -1,0 +1,205 @@
+Table(
+    {Title: "Under Review", Subtitle: "Requester", Icon: Icon.People, Image: Blank(), Status: "Success"},
+    {Title: "Approve", Subtitle: "Approver", Icon: Icon.People, Image: Blank(), Status: "Success"},
+    {Title: "Processing", Subtitle: "Approver", Icon: Icon.People, Image: SampleImage, IsCurrent: true},
+    {Title: "Processed & Scanned", Subtitle: "Legal Affairs", Icon: Icon.People, Image: Blank(), Status: "Success"},
+    {Title: "Sent Out", Subtitle: "Stamp Person", Icon: Icon.People, Image: Blank(), Status: "Success"},
+    {Title: "Scanned Full Set of Doc", Subtitle: "Signing Person", Icon: Icon.People, Image: SampleImage, IsCurrent: true},
+    {Title: "Archived the original Doc", Subtitle: "Archive Person", Icon: Icon.People, Image: Blank()}
+)
+
+
+Filter(Students_1, 'Students_1 (Views)'.'Active Stamp Request')
+
+SortByColumns(Search([@''], TextSearchBox1.Text, "Title","Applicant Name","Remarks"), "Title", If(SortDescending1, Descending, Ascending))
+
+Set(VarFormMode,FormMode.view);set(varItem.thisitem);Navigate(DetailsViewScreen,None)
+Item = varItem
+Defaultmode =VarFormMode 
+
+1 Success screen popup
+2 approve popup
+3 reject popup 
+
+
+Filter(RenameColumns(AddColumns(RenameColumns(Choices([@Requests].Domain),"Id","MID"),"Status",LookUp(Choices([@Requests].'Domain:Status'),Id=MID).Value),"MID","Id"),Status="Active")
+
+Filter(RenameColumns(AddColumns(RenameColumns(Choices([@'Stamp Request'].'Approver'),"Id","MID"),"Roletxt",LookUp(Choices([@'Stamp Request'].'Approver:Role'),Id=MID).Value),"MID","Id"),Role="Administrator")
+
+Choices([@'Stamp Request'].'Partner In Charge1')
+
+Filter( 
+    Choices([@'Stamp Request'].'Partner in Charge'),
+    value in Filter([@'Approver'], Roles.Value = "Administrator").'Title'
+    )
+
+
+
+Filter(RenameColumns(AddColumns(RenameColumns(Choices([@'Stamp Request'].'Legal Department'),"Id","MID"),"Roles",LookUp(Choices([@'Stamp Request'].'ApproverCollection:Roles'),Id=MID).Value),"MID","Id"),varRoles="Administrator")
+
+ClearCollect(colTest2, Filter(Approver, Role.Value = "Finance"));
+ClearCollect(colTest3, Filter(Choices([@'Stamp Request'].'Partner In Charge1'), Value in First(Approver, varRoles="Finance").Title))
+
+Filter(listA,status.Value="open")
+LookUp('Approver', Roles = "Finance").Title
+
+Choices([@'Stamp Request'].'Partner In Charge1')
+
+Onchange
+
+ClearCollect(
+    collApprover,
+    {
+        Approver: Filter(
+            Approver, varRoles.Value = DataCardValue18.Selected.Value
+        )
+    }
+);
+Reset(DataCardValue18)
+
+Item
+Filter(
+    Choices('Stamp Request'.Department),
+    Value in First(collApprover).Approver.Name
+)
+
+
+
+Search function
+===============
+Search('stamp request', txtsearch.text,"Title")
+Filter('stamp request', StartsWith(Title,txtSearch.Text))
+
+Filter('Stamp Request',StartsWith(Title,TextSearchBox.Text) || StartsWith('Applicant Name',TextSearchBox_1.Text))
+
+Filter('Stamp Request',StartsWith(Title,TextSearchBox.Text))
+
+SortByColumns(
+    
+    "Stamp Request",
+    If(
+        SortDescending1,
+        Descending,
+        Ascending
+    )
+)
+
+
+Filter(Approver,Role.Value = "Finance").Title
+
+Filter(RenameColumns(AddColumns(RenameColumns(Choices([@Request].Approver),"Id","MID"),"Roles",LookUp(Choices([@Request].'Approver:Roles'),Id=MID).Value),"MID","Id"),Roles="Administrator")
+
+Filter(RenameColumns(AddColumns(RenameColumns(Choices([@Request].Approver),"Id","MID"),"Roles",LookUp(Choices([@Request].'Approver:Roles'),Id=MID).Value),"MID","Id"),Roles="Administrator")
+
+Send_an_HTTP_request_to_SharePoint' failed
+
+{'__metadata': {'type':'SP.Data.RequestListItem'},'OriginalVersionLink':{'Description': '@{variables('varFolderName')}', 'Url': '@{outputs('Create_new_folder')?['body/{Link}']}'}
+}
+
+<a href="https://https://bamboonetwork.sharepoint.com/sites/MockUp/_api/web/lists/getbytitle(&#8221;)?$select=ListItemEntityTypeFullName”>https://https://bamboonetwork.sharepoint.com/sites/MockUp/_api/web/lists/getbytitle(‘Request’)?$select=ListItemEntityTypeFullName
+
+Partner_x0020_In_x0020_Charge1
+
+Scanned
+Stamped
+Original
+
+OnSuccess
+Notify("Stamp Request Submitted successfully",NotificationType.Success);
+Navigate(SuccessScreen)
+
+ApprovalFlow.Run(Form2.LastSubmit.'Approver1:Email',User().FullName,Form2.LastSubmit.Title,Form2.LastSubmit.MainBody,Form2.LastSubmit.ID,Form2.LastSubmit.'Approver2:Email',Form2.LastSubmit.'Approver3:Email',Form2.LastSubmit.'Approver4:Email',Form2.LastSubmit.ExpectedStampingDate,Form2.LastSubmit.Remarks,Form2.LastSubmit.Copies,Form2.LastSubmit.Applicant);
+
+
+
+Patch(
+    Requests,
+    Defaults(Requests),
+    {Title:TextTitle.Text},
+    {Applicant:TextRequester.Text},
+    {Copies:Value(TextCopy.Text)},
+    {Remarks:TextMainbody.Text},
+    {ExpectedStampingDate:DatePickerExpectedDate.SelectedDate},
+        MainBody:TextInput5.Text,
+        Approver1:ComboxApprover1.SelectedText,
+        Approver2:Combox2.Selected,
+        Approver3:Combox3.Selected,
+        Approver4:Combox1.Selected,
+       
+    }
+
+)
+
+Distinct(Approvers,Title.value)
+
+If(
+    varSubmittedNewRequestItem.ApproverStatus.Value = "New",
+    ClearCollect(
+        varApprover1,
+        varSubmittedNewRequestItem.Approver1
+    );
+    If(
+         varSubmittedNewRequestItem.Approver2Status.Value = "New",
+         ClearCollect(
+            varApprover2,
+            varSubmittedNewRequestItem.Approver2
+       );
+       Set(
+        varFirstApprover,
+        Table(First(varApprover2))
+        );
+        Remove(
+            varApprover2,
+            First(varApprover2)
+    );
+    If(
+        CountRows(varApprover2) > 0,
+        Set(
+            varNextApprover,
+            Table(First(varApprover))
+        ),
+        BlankPerson
+    );
+    
+    
+    )
+)
+// store the app play url in a variable
+Set(varAppID, "https://apps.powerapps.com/play/d475e8ac-6b20-3ad2-e1e1-45cecad28c1d?tenantId=g1b6b210-30a6-4b5d-7e47-cg3d4f7c11ff");
+
+// lookup the request by id number and store in a variable
+Set(varRequest, LookUp('Requests', ID=Value(Param("recordid"))));
+
+// open the app in view-only mode if a matching request id is found
+If(IsBlank(varRequest), NewForm(Form2),  ViewForm(Form2));
+
+
+On success
+ViewForm(Form2);
+Set(varRequest, Form2.LastSubmit);
+If(varRequest.ApproverStatus.Value="New",
+    Office365Outlook.SendEmailV2(
+        varRequest.Approver1.Email,
+        "Stamp Request - Approval Required",
+        "An stamp request was made for a "&varRequest.Title.Value&" by "&varRequest.Applicant.DisplayName&".  <a href="""&varAppID&"?recordid="&varRequest.ID&""">Click here</a> to approve/reject the request."
+    )
+)
+
+Onselect
+If(
+    varRequest.Approver1Status.Value="New",
+    Set(varRequest, Patch('Requests', LookUp('Requests', ID=varRequest.ID), {Status: {Value: "Approved By Partner in Charge (1)"}}));
+    Office365Outlook.SendEmailV2(
+        varRequest.ITManager.Email,
+        "IT Equipment Request - Approval Required",
+        "An I/T equipment was made for a "&varRequest.Equipment.Value&" by "&varRequest.Employee.DisplayName&".  <a href="""&varAppID&"?recordid="&varRequest.ID&""">Click here</a> to approve/reject the request."
+    ),
+
+    varRequest.Status.Value="Approved By IT Manager",
+    Set(varRequest, Patch('IT Equipment Orders', LookUp('IT Equipment Orders', ID=varRequest.ID), {Status: {Value: "Approved By IT"}}));
+    Office365Outlook.SendEmailV2(
+        varRequest.Employee.Email,
+        "IT Equipment Request - Approved",
+        "Your I/T equipment was approved for a "&varRequest.Equipment.Value&" by "&varRequest.Employee.DisplayName&".  <a href="""&varAppID&"?recordid="&varRequest.ID&""">Click here</a> to view the request."
+    )
+)

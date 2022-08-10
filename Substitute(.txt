@@ -1,0 +1,30 @@
+Substitute(
+    Concatenate(
+        "[",
+        Concat(
+            Gallery1.AllItems,
+            "{"& Char(34) & "ID"&Char(34)&":"& Char(34) & ID & Char(34) &",
+              "& Char(34) & "Request Name"&Char(34) & ":" & Char(34)&Title & Char(34) &",
+              "& Char(34) & "Applicant Name" & Char(34) & ":" & Char(34) & ApplicantName & Char(34)&",
+              "& Char(34) & "Number Of Files" & Char(34) & ":" & Char(34) & NumberofFiles&Char(34) &",
+              "& Char(34) & "Expected Stamping Date"&Char(34)&":"& Char(34) & ExpectedStampingDate & Char(34) &",
+              "& Char(34) & "Main Body"&Char(34) & ":" & Char(34)&MainBody & Char(34) &",
+              "& Char(34) & "Partner In Charge1" & Char(34) & ":" & Char(34) & PartnerInCharge1 & Char(34)&",
+              "& Char(34) & "Partner In Charge2" & Char(34) & ":" & Char(34) & PartnerInCharge2&Char(34) &",
+              "& Char(34) & "Finance Department"&Char(34)&":"& Char(34) & FinanceDepartment & Char(34) &",
+              "& Char(34) & "Legal Department"&Char(34) & ":" & Char(34)&Legal Department & Char(34) &",
+              "& Char(34) & "Scan Status" & Char(34) & ":" & Char(34) & ScanStatus & Char(34)&",
+              "& Char(34) & "Send Out Status" & Char(34) & ":" & Char(34) & SendOutStatus&Char(34) &",
+              "& Char(34) & "Archive Status"&Char(34)&":"& Char(34) & ArchiveStatus & Char(34) &",
+              "& Char(34) & "Final Version Link"&Char(34) & ":" & Char(34)&FinalVersionLink & Char(34) &",
+              "& Char(34) & "Original Version Link" & Char(34) & ":" & Char(34) & OriginalVersionLink & Char(34)&",
+              "& Char(34) & "Stamp Status" & Char(34) & ":" & Char(34) & StampStatus&Char(34) &",
+              "& Char(34) & "Sealed and Scanned Version Link" & Char(34) & ":" & Char(34) & SealedandScannedVersionLink&Char(34) &",
+              "& Char(34) & "Archive original doc status"&Char(34)&":"& Char(34) & Archiveoriginaldocstatus & Char(34) &"
+              },
+              "),
+              "]
+              "),",
+              ]",
+              "]
+              ")

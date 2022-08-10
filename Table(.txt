@@ -1,0 +1,10 @@
+Table(
+    {Title: "Under Review", Subtitle: "Requester", Icon: Icon.Person, Image: Blank(), Status: "Success"},
+    {Title: "Approve", Subtitle: "Approver", Icon: Icon.Person, Image: Blank(), Status: "Success"},
+   
+    {Title: "Processing", Subtitle: "Approver", Icon: Icon.Person, Image: SampleImage, IsCurrent: true},
+    {Title: "Processed & Scanned", Subtitle: "Legal Affairs", Icon: Icon.Person, Image: SampleImage, IsCurrent: true},
+    {Title: "Sent Out", Subtitle: "Stamp Person", Icon: Icon.Person, Image: SampleImage, IsCurrent: true},
+    {Title: "Scanned Full Set of Doc", Subtitle: "Signing Person", Icon: Icon.Person, Image: SampleImage, IsCurrent: true},
+    {Title: "Archived the original Doc", Archive Person: "", Icon: Icon.People, Image: Blank()}
+)
